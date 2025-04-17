@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="~{ base :: layout(~{::title} , ~{::section}) }">
+<head>
+<meta charset="ISO-8859-1">
+<title>Book Edit Form</title>
+
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header text-center">
+							<p class="fs-4">Edit Book</p>
+							<th:block th:if="${session.msg}">
+								<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+								<th:block th:text="${@BookServiceNew.removeSessionMessage()}"></th:block>
+							</th:block>
+						</div>
+						<div class="card-body">
+							<form action="/updateBookDtls" method="post">
+								<input type="hidden" name="bookId" th:value="${book.bookId}">
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Full
+										Book Name </label> <input type="text" class="form-control" name="bookName"
+										th:value="${book.bookName}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Book
+										Author</label> <input type="text" class="form-control" name="bookAuthor"
+										th:value="${book.bookAuthor}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Book Type
+									</label> <input type="text" class="form-control" name="bookType"
+										th:value="${book.bookType}">
+								</div>
+
+								<button type="submit" class="btn btn-primary">Update</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

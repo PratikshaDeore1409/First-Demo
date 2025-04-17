@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="~{ base :: layout(~{::title} , ~{::section}) }">
+<head>
+<meta charset="ISO-8859-1">
+<title>Index Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-3hYQhv4Jz3kWj1JUSfZb+Yy3R8UXY8KTrdo3rjU7FhS1bGzHgkVtWMM6c7FCh7A1ZRIKmxNZ0PzZ0Vd6qMTkQw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+	<section>
+		<div class="container p-5">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+					<div class="card">
+						<div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+						    <span th:text="${message}"></span>
+						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+
+						<div class="card-header text-center fs-4">Books Details</div>
+						<th:block th:if="${session.msg}">
+							<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+							<th:block></th:block><span th:if="${message}" th:text="${message}"></span></th:block>
+
+						</th:block>
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">BookId</th>
+										<th scope="col">Book_Name</th>
+										<th scope="col">Book_Author</th>
+										<th scope="col">Book_Type</th>
+										<th scope="col">Edit_Book</th>
+										<th scope="col">Delete_Book</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="e,c:${bookList}">
+										<th scope="row">[[${c.count}]]</th>
+										<td>[[${e.bookName}]]</td>
+										<td>[[${e.bookAuthor}]]</td>
+										<td>[[${e.bookType}]]</td>
+										<td>
+											<a th:href="@{'EditBook/'+${e.bookId}}" class="btn btn-primary" >
+											Edit
+											</a>
+										</td>
+										<td>
+											<a th:href="@{'deleteBook/'+${e.bookId}}"  onclick="return confirm('Are you sure you want to delete this book?');" class="btn btn-danger">  
+											Delete	
+											</a>
+										</td>
+										
+
+									</tr>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
